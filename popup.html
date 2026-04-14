@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exchange Calc</title>
+    <style>
+      :root {
+        --bg: #f3ede3;
+        --panel: #fffaf2;
+        --line: #d7cab8;
+        --text: #211c16;
+        --muted: #6c6257;
+        --accent: #af522d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        width: 360px;
+        min-height: 420px;
+        font-family: "Avenir Next", "PingFang SC", sans-serif;
+        background: linear-gradient(180deg, #f8f2e7 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      main {
+        padding: 18px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 1.35rem;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .panel {
+        margin-top: 16px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 88px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fffdf9;
+        font: inherit;
+        resize: vertical;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      button {
+        padding: 11px 12px;
+        border: 0;
+        border-radius: 12px;
+        background: var(--accent);
+        color: #fff;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button.secondary {
+        background: #e8ddd0;
+        color: var(--text);
+      }
+
+      .result {
+        margin-top: 16px;
+        padding: 14px;
+        border-radius: 16px;
+        background: #1e1c19;
+        color: #fff;
+      }
+
+      .result h2 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+      }
+
+      .result-line {
+        margin-top: 6px;
+        font-size: 0.95rem;
+      }
+
+      .status {
+        margin-top: 10px;
+        min-height: 20px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Exchange Calc</h1>
+      <p>先用这个常驻入口验证计算链路。可直接读取当前页选中内容，或手动输入金额。</p>
+
+      <div class="panel">
+        <textarea id="input" placeholder="例如：¥88.50、$2.15、RUB 300、2.15"></textarea>
+        <div class="actions">
+          <button id="read-selection" class="secondary">读取当前选中</button>
+          <button id="convert">立即换算</button>
+        </div>
+        <div id="status" class="status"></div>
+      </div>
+
+      <div id="result" class="result" hidden>
+        <h2>换算结果</h2>
+        <div id="source" class="result-line"></div>
+        <div id="cny" class="result-line"></div>
+        <div id="usd" class="result-line"></div>
+        <div id="rub" class="result-line"></div>
+      </div>
+    </main>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exchange Calc Chrome Test Page</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f1e8;
+        --panel: #fffaf0;
+        --line: #d6c9b8;
+        --text: #1f1a14;
+        --muted: #6c6258;
+        --accent: #b44f2e;
+        --accent-soft: #f0d8ca;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", sans-serif;
+        background:
+          radial-gradient(circle at top left, #fff6de 0, transparent 30%),
+          linear-gradient(180deg, #f5efe3 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 48px 20px 80px;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 4vw, 3.75rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      p {
+        line-height: 1.6;
+      }
+
+      .lead {
+        max-width: 720px;
+        margin: 0 0 24px;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .tip {
+        display: inline-block;
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 250, 240, 0.85);
+        font-size: 0.95rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      section {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--panel);
+        box-shadow: 0 14px 40px rgba(73, 49, 26, 0.06);
+      }
+
+      h2 {
+        margin: 0 0 12px;
+        font-size: 1rem;
+      }
+
+      ul {
+        padding-left: 18px;
+        margin: 0;
+      }
+
+      li {
+        margin: 10px 0;
+      }
+
+      .sample {
+        display: inline-block;
+        margin-top: 6px;
+        padding: 4px 8px;
+        border-radius: 8px;
+        background: var(--accent-soft);
+        font-weight: 600;
+        cursor: text;
+        user-select: text;
+      }
+
+      .paragraphs {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .paragraphs article {
+        padding: 20px;
+        border-left: 4px solid var(--accent);
+        background: rgba(255, 250, 240, 0.92);
+        border-radius: 0 18px 18px 0;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      code {
+        padding: 2px 6px;
+        border-radius: 6px;
+        background: #efe3d5;
+        font-family: "SFMono-Regular", "Menlo", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>右键换算测试页</h1>
+      <p class="lead">
+        选中下面的数字或价格，再点右键，检查插件是否正确识别币种、更新菜单标题并复制结果。
+        这页故意混入了合法、模糊和非法格式，方便你快速扫一遍行为边界。
+      </p>
+      <div class="tip">建议优先测试：<code>¥2</code>、<code>$2.15</code>、<code>₽300</code>、<code>2.15</code></div>
+
+      <div class="grid">
+        <section>
+          <h2>应当识别：符号金额</h2>
+          <ul>
+            <li><span class="sample">¥2</span></li>
+            <li><span class="sample">￥88.50</span></li>
+            <li><span class="sample">$2.15</span></li>
+            <li><span class="sample">₽300</span></li>
+            <li><span class="sample">$1,299.99</span></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>应当识别：代码金额</h2>
+          <ul>
+            <li><span class="sample">CNY 12</span></li>
+            <li><span class="sample">USD 5.5</span></li>
+            <li><span class="sample">RUB 300</span></li>
+            <li><span class="sample">usd 19.99</span></li>
+            <li><span class="sample">CNY 1,888</span></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>应当识别：纯数字</h2>
+          <ul>
+            <li><span class="sample">2</span></li>
+            <li><span class="sample">2.15</span></li>
+            <li><span class="sample">1000</span></li>
+            <li><span class="sample">1,200.50</span></li>
+            <li><span class="sample">0.99</span></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>应当不识别：非法格式</h2>
+          <ul>
+            <li><span class="sample">free</span></li>
+            <li><span class="sample">about two dollars</span></li>
+            <li><span class="sample">USD five</span></li>
+            <li><span class="sample">¥</span></li>
+            <li><span class="sample">12abc</span></li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="paragraphs">
+        <article>
+          <strong>电商正文混排</strong>
+          <p>
+            今日闪购价 <span class="sample">¥29.90</span>，原价 <span class="sample">$9.99</span>，
+            海外仓报价 <span class="sample">RUB 899</span>。如果你只选中数字
+            <span class="sample">29.90</span>，当前版本会按默认币种 CNY 处理。
+          </p>
+        </article>
+
+        <article>
+          <strong>边界与大数字</strong>
+          <p>
+            试试高位数字 <span class="sample">¥123,456.78</span>、
+            极小数字 <span class="sample">$0.01</span>、
+            整数 <span class="sample">500000</span>，
+            看菜单标题是否还能保持可读，复制结果是否完整。
+          </p>
+        </article>
+
+        <article>
+          <strong>当前已知不支持</strong>
+          <p class="muted">
+            下列格式第一版暂不打算支持：负数、区间价格、多货币混写、后缀货币写法。
+            可以手动验证这些是否正确被忽略：
+            <span class="sample">-5</span>、
+            <span class="sample">5 USD</span>、
+            <span class="sample">¥2 / $0.28</span>、
+            <span class="sample">10-20</span>。
+          </p>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>
