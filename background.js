@@ -1,6 +1,7 @@
 import { formatResultText } from "./src/formatter.js";
 import { parseSelection } from "./src/parser.js";
 import { convertPrice, getRates } from "./src/rates.js";
+import { getCacheTtlMs, getSettings } from "./src/settings.js";
 
 const MENU_ID = "exchange-calc-convert";
 const DEFAULT_MENU_TITLE = "转换选中金额";
@@ -32,7 +33,8 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     return;
   }
 
-  const parsed = parseSelection(info.selectionText ?? "");
+  const settings = await getSettings();
+  const parsed = parseSelection(info.selectionText ?? "", settings);
   if (!parsed) {
     await showNotification("未识别到可转换的金额");
     return;
@@ -40,7 +42,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
   let resultText = "";
   try {
-    const rates = await getRates();
+    const rates = await getRates({ cacheTtlMs: getCacheTtlMs(settings) });
     resultText = formatResultText(convertPrice(parsed, rates));
   } catch (error) {
     console.error("Failed to compute conversion on click", error);
@@ -94,7 +96,7 @@ async function showNotification(message) {
   try {
     await chrome.notifications.create({
       type: "basic",
-      iconUrl: "icons/icon-128.png",
+      iconUrl: chrome.runtime.getURL("icons/icon-128.png"),
       title: "Exchange Calc",
       message,
     });
@@ -104,14 +106,15 @@ async function showNotification(message) {
 }
 
 async function updateMenuFromSelection(selection, _tabId) {
-  const parsed = parseSelection(selection);
+  const settings = await getSettings();
+  const parsed = parseSelection(selection, settings);
   if (!parsed) {
     await updateMenuTitle(DEFAULT_MENU_TITLE);
     return;
   }
 
   try {
-    const rates = await getRates();
+    const rates = await getRates({ cacheTtlMs: getCacheTtlMs(settings) });
     const converted = convertPrice(parsed, rates);
     const title = buildMenuTitle(converted.values);
     await updateMenuTitle(title);

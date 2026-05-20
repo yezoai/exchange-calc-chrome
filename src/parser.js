@@ -8,7 +8,8 @@ const CURRENCY_SYMBOLS = {
 const CURRENCY_CODES = ["CNY", "USD", "RUB"];
 const DEFAULT_CURRENCY = "CNY";
 
-export function parseSelection(rawText) {
+export function parseSelection(rawText, options = {}) {
+  const defaultCurrency = normalizeCurrency(options.defaultCurrency) ?? DEFAULT_CURRENCY;
   const text = String(rawText ?? "").replace(/\s+/g, " ").trim();
   if (!text) {
     return null;
@@ -25,7 +26,7 @@ export function parseSelection(rawText) {
   }
 
   if (/^[0-9][0-9,]*(?:\.[0-9]+)?$/.test(text)) {
-    return buildParsedAmount(text, DEFAULT_CURRENCY, text, true);
+    return buildParsedAmount(text, defaultCurrency, text, true);
   }
 
   return null;
@@ -47,4 +48,13 @@ function buildParsedAmount(amountText, currency, rawText, assumed = false) {
     rawText,
     assumed,
   };
+}
+
+function normalizeCurrency(currency) {
+  if (typeof currency !== "string") {
+    return null;
+  }
+
+  const value = currency.toUpperCase();
+  return CURRENCY_CODES.includes(value) ? value : null;
 }

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exchange Calc Settings</title>
+    <style>
+      :root {
+        --bg: #f4eee3;
+        --panel: #fffaf2;
+        --line: #d9ccb9;
+        --text: #211c16;
+        --muted: #6b6256;
+        --accent: #b2512d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Avenir Next", "PingFang SC", sans-serif;
+        background: linear-gradient(180deg, #faf4e9 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      main {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 40px 20px 64px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(2rem, 5vw, 3rem);
+      }
+
+      .lead {
+        margin: 0 0 24px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .panel {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: var(--panel);
+        box-shadow: 0 18px 44px rgba(69, 49, 28, 0.07);
+      }
+
+      .field {
+        margin-top: 18px;
+      }
+
+      .field:first-child {
+        margin-top: 0;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .hint {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      select,
+      input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fffdfa;
+        font: inherit;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      button {
+        padding: 12px 16px;
+        border: 0;
+        border-radius: 12px;
+        background: var(--accent);
+        color: #fff;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button.secondary {
+        background: #e8ddd0;
+        color: var(--text);
+      }
+
+      #status {
+        margin-top: 14px;
+        min-height: 20px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>设置</h1>
+      <p class="lead">配置纯数字的默认币种，以及汇率缓存时长。保存后右键菜单和弹窗都会立即使用新设置。</p>
+
+      <div class="panel">
+        <div class="field">
+          <label for="default-currency">纯数字默认币种</label>
+          <select id="default-currency">
+            <option value="CNY">CNY / 人民币</option>
+            <option value="USD">USD / 美元</option>
+            <option value="RUB">RUB / 卢布</option>
+          </select>
+          <div class="hint">例如选中 `2.15` 时，按这里的币种解释。</div>
+        </div>
+
+        <div class="field">
+          <label for="cache-ttl">汇率缓存时长（分钟）</label>
+          <input id="cache-ttl" type="number" min="5" max="1440" step="5" />
+          <div class="hint">范围 5 到 1440 分钟。缓存过期后会重新请求汇率。</div>
+        </div>
+
+        <div class="actions">
+          <button id="save">保存设置</button>
+          <button id="reset" class="secondary">恢复默认</button>
+        </div>
+
+        <div id="status"></div>
+      </div>
+    </main>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

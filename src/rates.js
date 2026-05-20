@@ -1,14 +1,15 @@
 const CACHE_KEY = "exchange-calc-rates";
-const CACHE_TTL_MS = 60 * 60 * 1000;
+const DEFAULT_CACHE_TTL_MS = 60 * 60 * 1000;
 const TARGET_CURRENCIES = ["USD", "CNY", "RUB"];
 const FALLBACK_ENDPOINTS = [
   "https://open.er-api.com/v6/latest/USD",
   "https://api.exchangerate-api.com/v4/latest/USD",
 ];
 
-export async function getRates() {
+export async function getRates(options = {}) {
+  const cacheTtlMs = normalizeCacheTtl(options.cacheTtlMs);
   const cached = await readCachedRates();
-  if (cached && !isExpired(cached.updatedAt)) {
+  if (cached && !isExpired(cached.updatedAt, cacheTtlMs)) {
     return cached.rates;
   }
 
@@ -81,6 +82,14 @@ async function writeCachedRates(rates) {
   });
 }
 
-function isExpired(updatedAt) {
-  return !updatedAt || Date.now() - updatedAt > CACHE_TTL_MS;
+function isExpired(updatedAt, cacheTtlMs) {
+  return !updatedAt || Date.now() - updatedAt > cacheTtlMs;
+}
+
+function normalizeCacheTtl(cacheTtlMs) {
+  if (!Number.isFinite(cacheTtlMs) || cacheTtlMs <= 0) {
+    return DEFAULT_CACHE_TTL_MS;
+  }
+
+  return cacheTtlMs;
 }

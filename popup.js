@@ -1,5 +1,6 @@
 import { parseSelection } from "./src/parser.js";
 import { convertPrice, getRates } from "./src/rates.js";
+import { getCacheTtlMs, getSettings } from "./src/settings.js";
 
 const input = document.getElementById("input");
 const status = document.getElementById("status");
@@ -33,7 +34,8 @@ document.getElementById("read-selection").addEventListener("click", async () => 
 });
 
 document.getElementById("convert").addEventListener("click", async () => {
-  const parsed = parseSelection(input.value);
+  const settings = await getSettings();
+  const parsed = parseSelection(input.value, settings);
   if (!parsed) {
     hideResult();
     setStatus("未识别到可转换的金额格式");
@@ -43,7 +45,7 @@ document.getElementById("convert").addEventListener("click", async () => {
   setStatus("正在获取汇率...");
 
   try {
-    const rates = await getRates();
+    const rates = await getRates({ cacheTtlMs: getCacheTtlMs(settings) });
     const converted = convertPrice(parsed, rates);
 
     source.textContent = `来源: ${parsed.amount} ${parsed.currency}${parsed.assumed ? " (default)" : ""}`;
