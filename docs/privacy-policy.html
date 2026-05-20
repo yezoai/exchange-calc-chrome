@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exchange Calc Chrome — Privacy Policy</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+      color: #1f2937;
+      background: #ffffff;
+    }
+    h1 { font-size: 1.6rem; margin-bottom: 0.2em; }
+    h2 { font-size: 1.15rem; margin-top: 2em; border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0.3em; }
+    .meta { color: #6b7280; font-size: 0.9rem; }
+    .lang-divider { margin: 3em 0; border: none; border-top: 2px dashed #e5e7eb; }
+    code { background: #f3f4f6; padding: 1px 5px; border-radius: 4px;
+      font-size: 0.9em; }
+    a { color: #2563eb; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #111827; color: #e5e7eb; }
+      h2 { border-color: #374151; }
+      code { background: #1f2937; }
+      .lang-divider { border-color: #374151; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Exchange Calc Chrome — Privacy Policy</h1>
+  <p class="meta">Effective date: 2026-05-20</p>
+
+  <p>
+    Exchange Calc Chrome (the "extension") is committed to protecting your
+    privacy. This policy explains what data the extension does and does not
+    handle.
+  </p>
+
+  <h2>Data we collect</h2>
+  <p>
+    <strong>None.</strong> The extension does not collect, store on our
+    servers, or transmit any personal or identifiable information. We have no
+    servers, no accounts, and no analytics or tracking of any kind.
+  </p>
+
+  <h2>How the extension works</h2>
+  <ul>
+    <li>
+      When you select text on a web page, the extension reads that text
+      selection <strong>locally on your device</strong> to detect whether it
+      contains a monetary amount.
+    </li>
+    <li>
+      The selected text is never uploaded anywhere. It is only sent to the
+      extension's own background service worker so the right-click menu can
+      preview the conversion.
+    </li>
+    <li>
+      To convert currencies, the extension requests the latest public
+      exchange rates from <code>open.er-api.com</code> and, as a fallback,
+      <code>api.exchangerate-api.com</code>. These requests ask only for
+      generic, USD-based rate tables and <strong>contain no selected text and
+      no user information</strong>.
+    </li>
+    <li>
+      When you click the conversion menu item, the result is written to your
+      device's clipboard. This happens only on that explicit action.
+    </li>
+  </ul>
+
+  <h2>Local storage</h2>
+  <p>
+    The extension uses Chrome's local storage to cache the most recently
+    fetched exchange rates (for up to one hour) and to save your preferences
+    from the options page (default currency and cache duration). This data
+    stays on your device and is never sent to us or any third party.
+  </p>
+
+  <h2>Third-party services</h2>
+  <p>
+    The exchange-rate providers (<code>open.er-api.com</code> and
+    <code>api.exchangerate-api.com</code>) may, like any web service, log
+    standard request metadata such as IP addresses. The extension sends them
+    no personal data beyond what an ordinary web request includes. Please
+    refer to those providers' own policies for details.
+  </p>
+
+  <h2>Data sharing and selling</h2>
+  <p>
+    We do not sell, rent, or share any user data, because we do not collect
+    any.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If this policy changes, the updated version will be published at this
+    same URL with a new effective date.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions about this policy can be sent to:
+    <a href="mailto:ichaoliang@gmail.com">ichaoliang@gmail.com</a>.
+  </p>
+
+  <hr class="lang-divider" />
+
+  <h1>Exchange Calc Chrome — 隐私政策</h1>
+  <p class="meta">生效日期：2026-05-20</p>
+
+  <p>
+    Exchange Calc Chrome（以下简称“本扩展”）重视并保护你的隐私。本政策说明本扩展会
+    以及不会处理哪些数据。
+  </p>
+
+  <h2>我们收集的数据</h2>
+  <p>
+    <strong>没有。</strong> 本扩展不收集、不在服务器上存储、也不上传任何个人或可识别
+    身份的信息。我们没有服务器、没有账号体系，也没有任何形式的统计或追踪。
+  </p>
+
+  <h2>本扩展的工作方式</h2>
+  <ul>
+    <li>
+      当你在网页上选中文本时，本扩展会<strong>在你的设备本地</strong>读取该文本选区，
+      以判断其中是否包含金额。
+    </li>
+    <li>
+      选中的文本不会被上传到任何地方，仅会发送给本扩展自身的后台服务，
+      以便右键菜单预览换算结果。
+    </li>
+    <li>
+      为完成货币换算，本扩展会向 <code>open.er-api.com</code>（以及作为备用的
+      <code>api.exchangerate-api.com</code>）请求最新的公开汇率。这些请求只获取
+      通用的、以美元为基准的汇率表，<strong>不包含任何选中文本或用户信息</strong>。
+    </li>
+    <li>
+      当你点击换算菜单项时，结果会被写入你设备的剪贴板。该操作仅在你主动点击时发生。
+    </li>
+  </ul>
+
+  <h2>本地存储</h2>
+  <p>
+    本扩展使用 Chrome 的本地存储来缓存最近一次获取的汇率（最长 1 小时），并保存你在
+    设置页中的偏好（默认币种和汇率缓存时长）。这些数据始终保留在你的设备上，绝不会
+    发送给我们或任何第三方。
+  </p>
+
+  <h2>第三方服务</h2>
+  <p>
+    汇率数据提供方（<code>open.er-api.com</code> 与
+    <code>api.exchangerate-api.com</code>）与任何网络服务一样，可能会记录 IP 地址等
+    标准请求元数据。本扩展不会向其发送超出普通网络请求范围的任何个人数据。详情请参阅
+    这些服务方各自的隐私政策。
+  </p>
+
+  <h2>数据共享与出售</h2>
+  <p>
+    我们不出售、不出租、不共享任何用户数据——因为我们根本不收集任何数据。
+  </p>
+
+  <h2>政策变更</h2>
+  <p>
+    如本政策有所变更，更新后的版本将发布在同一网址，并标注新的生效日期。
+  </p>
+
+  <h2>联系方式</h2>
+  <p>
+    如对本政策有任何疑问，可发送邮件至：
+    <a href="mailto:ichaoliang@gmail.com">ichaoliang@gmail.com</a>。
+  </p>
+
+</body>
+</html>
