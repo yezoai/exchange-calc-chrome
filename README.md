@@ -35,6 +35,10 @@
   结果文本格式化
 - `test-page.html`
   本地测试页
+- `icons/`
+  扩展图标（16 / 32 / 48 / 128）
+- `scripts/make_icons.py`
+  图标生成脚本（依赖 Pillow）
 
 ## 本地使用
 
